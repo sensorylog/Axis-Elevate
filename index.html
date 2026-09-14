@@ -7,143 +7,349 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Top bar -->
-  <header class="top-bar">
-    <div class="brand">AXIS</div>
-    <button id="oracleBtn" class="top-btn">Oracle</button>
-  </header>
+  <!-- ONBOARDING -->
+  <div id="onboarding" class="onboarding">
+    <div class="onboarding-card">
+      <h1 class="onboarding-title">Let’s build your AXIS</h1>
+      <p class="onboarding-subtitle">Answer a few questions so AXIS can personalize everything for you.</p>
 
-  <!-- Main content -->
-  <main class="content">
-    <!-- TODAY -->
-    <section id="view-today" class="view active">
-      <h1>Your Next Move</h1>
+      <form id="onboardingForm">
+        <!-- Identity -->
+        <fieldset class="step" data-step="1">
+          <legend>About you</legend>
 
-      <div class="card next-move">
-        <div class="nm-label">Recommended</div>
-        <div class="nm-type" id="nmType">—</div>
-        <div class="nm-title" id="nmTitle">Loading recommendation…</div>
-        <div class="nm-meta" id="nmMeta"></div>
-        <button id="nmAction" class="btn-primary">Start</button>
-      </div>
+          <label>
+            Name
+            <input type="text" name="name" required placeholder="Your name" />
+          </label>
 
-      <h2>Today at a glance</h2>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Readiness</div>
-          <div class="stat-value" id="readinessValue">—</div>
+          <label>
+            Age
+            <input type="number" name="age" min="10" max="90" required placeholder="Age" />
+          </label>
+
+          <label>
+            Sex
+            <select name="sex" required>
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            Height (cm)
+            <input type="number" name="height" min="120" max="230" required placeholder="e.g. 175" />
+          </label>
+
+          <label>
+            Weight (kg)
+            <input type="number" name="weight" min="35" max="200" required placeholder="e.g. 75" />
+          </label>
+        </fieldset>
+
+        <!-- Goals -->
+        <fieldset class="step" data-step="2">
+          <legend>Primary goal</legend>
+          <label class="radio-card">
+            <input type="radio" name="goal" value="fat_loss" required />
+            <span>
+              <strong>Fat loss</strong>
+              <small>Lose body fat while keeping strength</small>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="goal" value="muscle_gain" required />
+            <span>
+              <strong>Muscle gain</strong>
+              <small>Build muscle and strength</small>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="goal" value="strength" required />
+            <span>
+              <strong>Strength</strong>
+              <small>Get stronger on key lifts</small>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="goal" value="fitness" required />
+            <span>
+              <strong>Fitness</strong>
+              <small>General conditioning and health</small>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="goal" value="health" required />
+            <span>
+              <strong>General health</strong>
+              <small>Feel better, move more, eat well</small>
+            </span>
+          </label>
+        </fieldset>
+
+        <!-- Experience -->
+        <fieldset class="step" data-step="3">
+          <legend>Training experience</legend>
+          <label class="radio-card">
+            <input type="radio" name="experience" value="beginner" required />
+            <span>
+              <strong>Beginner</strong>
+              <small>Less than 6 months of consistent training</small>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="experience" value="intermediate" required />
+            <span>
+              <strong>Intermediate</strong>
+              <small>6–24 months, comfortable with basic lifts</small>
+            </span>
+          </label>
+          <label class="radio-card">
+            <input type="radio" name="experience" value="advanced" required />
+            <span>
+              <strong>Advanced</strong>
+              <small>2+ years, structured programming</small>
+            </span>
+          </label>
+        </fieldset>
+
+        <!-- Training -->
+        <fieldset class="step" data-step="4">
+          <legend>Training setup</legend>
+
+          <label>
+            Days per week you can train
+            <select name="trainingDays" required>
+              <option value="2">2 days</option>
+              <option value="3" selected>3 days</option>
+              <option value="4">4 days</option>
+              <option value="5">5 days</option>
+              <option value="6">6 days</option>
+            </select>
+          </label>
+
+          <label>
+            Preferred session length
+            <select name="sessionLength" required>
+              <option value="30">~30 minutes</option>
+              <option value="45" selected>~45 minutes</option>
+              <option value="60">~60 minutes</option>
+              <option value="75">~75 minutes</option>
+            </select>
+          </label>
+
+          <label>
+            Main training environment
+            <select name="environment" required>
+              <option value="gym">Gym</option>
+              <option value="home">Home</option>
+              <option value="mixed">Mixed (gym + home)</option>
+              <option value="outdoors">Outdoors</option>
+            </select>
+          </label>
+
+          <label>
+            Equipment available
+            <textarea name="equipment" rows="3" placeholder="e.g. barbell, dumbbells, pull-up bar, bands, none"></textarea>
+          </label>
+        </fieldset>
+
+        <!-- Activity & Nutrition -->
+        <fieldset class="step" data-step="5">
+          <legend>Activity & nutrition</legend>
+
+          <label>
+            Daily activity level
+            <select name="activity" required>
+              <option value="sedentary">Mostly sitting (desk job, little walking)</option>
+              <option value="light" selected>Lightly active (some walking, light exercise)</option>
+              <option value="moderate">Moderately active (regular exercise, on your feet)</option>
+              <option value="high">Highly active (physical job or lots of training)</option>
+            </select>
+          </label>
+
+          <label>
+            Dietary preference
+            <select name="diet" required>
+              <option value="no_restriction">No restrictions</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="pescatarian">Pescatarian</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            Foods you avoid or allergies
+            <textarea name="avoidFoods" rows="3" placeholder="e.g. pork, shellfish allergy, dairy intolerant, etc."></textarea>
+          </label>
+
+          <label>
+            Preferred cuisines
+            <textarea name="cuisines" rows="2" placeholder="e.g. West African, Asian, Mediterranean, fast food, home cooking"></textarea>
+          </label>
+
+          <label>
+            Meals per day (typical)
+            <select name="mealsPerDay" required>
+              <option value="2">2 meals</option>
+              <option value="3" selected>3 meals</option>
+              <option value="4">4 meals</option>
+              <option value="5">5+ meals</option>
+            </select>
+          </label>
+        </fieldset>
+
+        <div class="onboarding-actions">
+          <button type="button" id="prevStep" class="btn-secondary" disabled>Back</button>
+          <button type="button" id="nextStep" class="btn-primary">Next</button>
+          <button type="submit" id="finishOnboarding" class="btn-primary" style="display:none;">Build My AXIS</button>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Protein</div>
-          <div class="stat-value" id="proteinValue">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Sleep</div>
-          <div class="stat-value" id="sleepValue">—</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Steps</div>
-          <div class="stat-value" id="stepsValue">—</div>
-        </div>
-      </div>
-
-      <h2>Quick actions</h2>
-      <div class="actions-row">
-        <button class="btn-secondary" data-go="train">Train</button>
-        <button class="btn-secondary" data-go="food">Food</button>
-        <button class="btn-secondary" data-go="move">Move</button>
-        <button class="btn-secondary" data-go="progress">Progress</button>
-      </div>
-    </section>
-
-    <!-- TRAIN -->
-    <section id="view-train" class="view">
-      <h1>Train</h1>
-      <div class="card">
-        <h2>Today’s Session</h2>
-        <div id="sessionInfo" class="text-block">No session generated yet.</div>
-        <button id="generateSessionBtn" class="btn-primary">Generate Session</button>
-      </div>
-    </section>
-
-    <!-- FOOD -->
-    <section id="view-food" class="view">
-      <h1>Food</h1>
-
-      <div class="card">
-        <h2>Search foods</h2>
-        <input id="foodQuery" type="text" placeholder="e.g. jollof rice, chicken, sushi" />
-        <button id="foodSearchBtn" class="btn-primary">Search</button>
-        <div id="foodResults" class="list"></div>
-      </div>
-
-      <div class="card">
-        <h2>Barcode lookup</h2>
-        <input id="barcodeInput" type="text" placeholder="Enter barcode" />
-        <button id="barcodeBtn" class="btn-primary">Lookup</button>
-        <div id="barcodeResult" class="list"></div>
-      </div>
-    </section>
-
-    <!-- MOVE -->
-    <section id="view-move" class="view">
-      <h1>Move</h1>
-      <div class="card">
-        <h2>Walk</h2>
-        <button id="startWalkBtn" class="btn-primary">Start Walk</button>
-        <div id="walkStatus" class="text-block">Not started</div>
-      </div>
-    </section>
-
-    <!-- PROGRESS -->
-    <section id="view-progress" class="view">
-      <h1>Progress</h1>
-      <div class="card">
-        <h2>Summary</h2>
-        <div id="progressSummary" class="text-block">No data yet.</div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Oracle Panel -->
-  <aside id="oraclePanel" class="oracle-panel hidden">
-    <div class="oracle-header">
-      <h2>Oracle</h2>
-      <button id="closeOracle" class="icon-btn">✕</button>
+      </form>
     </div>
-    <div id="oracleContent" class="oracle-content">
-      Ask AXIS anything about your training, food, or progress.
-    </div>
-    <div class="oracle-input-row">
-      <input id="oracleInput" type="text" placeholder="I’m exhausted today…" />
-      <button id="oracleSend" class="btn-primary">Send</button>
-    </div>
-  </aside>
+  </div>
 
-  <!-- Bottom navigation -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" data-view="view-today">
-      <span class="nav-label">Today</span>
-    </button>
-    <button class="nav-item" data-view="view-train">
-      <span class="nav-label">Train</span>
-    </button>
-    <button class="nav-item" data-view="view-food">
-      <span class="nav-label">Food</span>
-    </button>
-    <button class="nav-item" data-view="view-move">
-      <span class="nav-label">Move</span>
-    </button>
-    <button class="nav-item" data-view="view-progress">
-      <span class="nav-label">Progress</span>
-    </button>
-  </nav>
+  <!-- MAIN APP (hidden until onboarding done) -->
+  <div id="app" class="hidden">
+    <header class="top-bar">
+      <div class="brand">AXIS</div>
+      <button id="oracleBtn" class="top-btn">Oracle</button>
+    </header>
+
+    <main class="content">
+      <!-- TODAY -->
+      <section id="view-today" class="view active">
+        <h1>Your Next Move</h1>
+
+        <div class="card next-move">
+          <div class="nm-label">Recommended</div>
+          <div class="nm-type" id="nmType">—</div>
+          <div class="nm-title" id="nmTitle">Loading recommendation…</div>
+          <div class="nm-meta" id="nmMeta"></div>
+          <button id="nmAction" class="btn-primary">Start</button>
+        </div>
+
+        <h2>Today at a glance</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Readiness</div>
+            <div class="stat-value" id="readinessValue">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Protein</div>
+            <div class="stat-value" id="proteinValue">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Sleep</div>
+            <div class="stat-value" id="sleepValue">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Steps</div>
+            <div class="stat-value" id="stepsValue">—</div>
+          </div>
+        </div>
+
+        <h2>Quick actions</h2>
+        <div class="actions-row">
+          <button class="btn-secondary" data-go="train">Train</button>
+          <button class="btn-secondary" data-go="food">Food</button>
+          <button class="btn-secondary" data-go="move">Move</button>
+          <button class="btn-secondary" data-go="progress">Progress</button>
+        </div>
+      </section>
+
+      <!-- TRAIN -->
+      <section id="view-train" class="view">
+        <h1>Train</h1>
+        <div class="card">
+          <h2>Today’s Session</h2>
+          <div id="sessionInfo" class="text-block">No session generated yet.</div>
+          <button id="generateSessionBtn" class="btn-primary">Generate Session</button>
+        </div>
+      </section>
+
+      <!-- FOOD -->
+      <section id="view-food" class="view">
+        <h1>Food</h1>
+
+        <div class="card">
+          <h2>Search foods</h2>
+          <input id="foodQuery" type="text" placeholder="e.g. jollof rice, chicken, sushi" />
+          <button id="foodSearchBtn" class="btn-primary">Search</button>
+          <div id="foodResults" class="list"></div>
+        </div>
+
+        <div class="card">
+          <h2>Barcode lookup</h2>
+          <input id="barcodeInput" type="text" placeholder="Enter barcode" />
+          <button id="barcodeBtn" class="btn-primary">Lookup</button>
+          <div id="barcodeResult" class="list"></div>
+        </div>
+      </section>
+
+      <!-- MOVE -->
+      <section id="view-move" class="view">
+        <h1>Move</h1>
+        <div class="card">
+          <h2>Walk</h2>
+          <button id="startWalkBtn" class="btn-primary">Start Walk</button>
+          <div id="walkStatus" class="text-block">Not started</div>
+        </div>
+      </section>
+
+      <!-- PROGRESS -->
+      <section id="view-progress" class="view">
+        <h1>Progress</h1>
+        <div class="card">
+          <h2>Summary</h2>
+          <div id="progressSummary" class="text-block">No data yet.</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Oracle Panel -->
+    <aside id="oraclePanel" class="oracle-panel hidden">
+      <div class="oracle-header">
+        <h2>Oracle</h2>
+        <button id="closeOracle" class="icon-btn">✕</button>
+      </div>
+      <div id="oracleContent" class="oracle-content">
+        Ask AXIS anything about your training, food, or progress.
+      </div>
+      <div class="oracle-input-row">
+        <input id="oracleInput" type="text" placeholder="I’m exhausted today…" />
+        <button id="oracleSend" class="btn-primary">Send</button>
+      </div>
+    </aside>
+
+    <!-- Bottom navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="view-today">
+        <span class="nav-label">Today</span>
+      </button>
+      <button class="nav-item" data-view="view-train">
+        <span class="nav-label">Train</span>
+      </button>
+      <button class="nav-item" data-view="view-food">
+        <span class="nav-label">Food</span>
+      </button>
+      <button class="nav-item" data-view="view-move">
+        <span class="nav-label">Move</span>
+      </button>
+      <button class="nav-item" data-view="view-progress">
+        <span class="nav-label">Progress</span>
+      </button>
+    </nav>
+  </div>
 
   <script type="module" src="data.js"></script>
   <script type="module" src="api.js"></script>
   <script type="module" src="intelligence.js"></script>
   <script type="module" src="training.js"></script>
   <script type="module" src="movement.js"></script>
+  <script type="module" src="onboarding.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>
