@@ -3,96 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <title>AXIS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="app-header">
+  <!-- Top bar -->
+  <header class="top-bar">
     <div class="brand">AXIS</div>
-    <nav class="top-nav">
-      <button data-tab="today" class="active">Today</button>
-      <button data-tab="train">Train</button>
-      <button data-tab="food">Food</button>
-      <button data-tab="move">Move</button>
-      <button data-tab="progress">Progress</button>
-    </nav>
-    <button id="oracleToggle" class="icon-btn">Oracle</button>
+    <button id="oracleBtn" class="top-btn">Oracle</button>
   </header>
 
-  <main class="app-main">
+  <!-- Main content -->
+  <main class="content">
     <!-- TODAY -->
-    <section id="today" class="tab active">
+    <section id="view-today" class="view active">
       <h1>Your Next Move</h1>
-      <div id="nextMoveCard" class="card next-move">
+
+      <div class="card next-move">
+        <div class="nm-label">Recommended</div>
         <div class="nm-type" id="nmType">—</div>
-        <div class="nm-title" id="nmTitle">Loading…</div>
+        <div class="nm-title" id="nmTitle">Loading recommendation…</div>
         <div class="nm-meta" id="nmMeta"></div>
-        <button id="nmAction" class="primary-btn">Start</button>
+        <button id="nmAction" class="btn-primary">Start</button>
       </div>
 
-      <div class="grid">
-        <div class="card">
-          <h3>Readiness</h3>
-          <div id="readinessValue">—</div>
+      <h2>Today at a glance</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Readiness</div>
+          <div class="stat-value" id="readinessValue">—</div>
         </div>
-        <div class="card">
-          <h3>Protein</h3>
-          <div id="proteinValue">—</div>
+        <div class="stat-card">
+          <div class="stat-label">Protein</div>
+          <div class="stat-value" id="proteinValue">—</div>
         </div>
-        <div class="card">
-          <h3>Sleep</h3>
-          <div id="sleepValue">—</div>
+        <div class="stat-card">
+          <div class="stat-label">Sleep</div>
+          <div class="stat-value" id="sleepValue">—</div>
         </div>
-        <div class="card">
-          <h3>Steps</h3>
-          <div id="stepsValue">—</div>
+        <div class="stat-card">
+          <div class="stat-label">Steps</div>
+          <div class="stat-value" id="stepsValue">—</div>
         </div>
+      </div>
+
+      <h2>Quick actions</h2>
+      <div class="actions-row">
+        <button class="btn-secondary" data-go="train">Train</button>
+        <button class="btn-secondary" data-go="food">Food</button>
+        <button class="btn-secondary" data-go="move">Move</button>
+        <button class="btn-secondary" data-go="progress">Progress</button>
       </div>
     </section>
 
     <!-- TRAIN -->
-    <section id="train" class="tab">
+    <section id="view-train" class="view">
       <h1>Train</h1>
       <div class="card">
-        <h3>Today’s Session</h3>
-        <div id="sessionInfo">No session generated yet.</div>
-        <button id="generateSessionBtn" class="primary-btn">Generate Session</button>
+        <h2>Today’s Session</h2>
+        <div id="sessionInfo" class="text-block">No session generated yet.</div>
+        <button id="generateSessionBtn" class="btn-primary">Generate Session</button>
       </div>
     </section>
 
     <!-- FOOD -->
-    <section id="food" class="tab">
+    <section id="view-food" class="view">
       <h1>Food</h1>
+
       <div class="card">
-        <h3>Search</h3>
+        <h2>Search foods</h2>
         <input id="foodQuery" type="text" placeholder="e.g. jollof rice, chicken, sushi" />
-        <button id="foodSearchBtn" class="primary-btn">Search</button>
+        <button id="foodSearchBtn" class="btn-primary">Search</button>
         <div id="foodResults" class="list"></div>
       </div>
+
       <div class="card">
-        <h3>Barcode</h3>
+        <h2>Barcode lookup</h2>
         <input id="barcodeInput" type="text" placeholder="Enter barcode" />
-        <button id="barcodeBtn" class="primary-btn">Lookup</button>
+        <button id="barcodeBtn" class="btn-primary">Lookup</button>
         <div id="barcodeResult" class="list"></div>
       </div>
     </section>
 
     <!-- MOVE -->
-    <section id="move" class="tab">
+    <section id="view-move" class="view">
       <h1>Move</h1>
       <div class="card">
-        <h3>Walk</h3>
-        <button id="startWalkBtn" class="primary-btn">Start Walk</button>
-        <div id="walkStatus">Not started</div>
+        <h2>Walk</h2>
+        <button id="startWalkBtn" class="btn-primary">Start Walk</button>
+        <div id="walkStatus" class="text-block">Not started</div>
       </div>
     </section>
 
     <!-- PROGRESS -->
-    <section id="progress" class="tab">
+    <section id="view-progress" class="view">
       <h1>Progress</h1>
       <div class="card">
-        <h3>Summary</h3>
-        <div id="progressSummary">No data yet.</div>
+        <h2>Summary</h2>
+        <div id="progressSummary" class="text-block">No data yet.</div>
       </div>
     </section>
   </main>
@@ -108,10 +116,34 @@
     </div>
     <div class="oracle-input-row">
       <input id="oracleInput" type="text" placeholder="I’m exhausted today…" />
-      <button id="oracleSend" class="primary-btn">Send</button>
+      <button id="oracleSend" class="btn-primary">Send</button>
     </div>
   </aside>
 
-  <script src="app.js"></script>
+  <!-- Bottom navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-view="view-today">
+      <span class="nav-label">Today</span>
+    </button>
+    <button class="nav-item" data-view="view-train">
+      <span class="nav-label">Train</span>
+    </button>
+    <button class="nav-item" data-view="view-food">
+      <span class="nav-label">Food</span>
+    </button>
+    <button class="nav-item" data-view="view-move">
+      <span class="nav-label">Move</span>
+    </button>
+    <button class="nav-item" data-view="view-progress">
+      <span class="nav-label">Progress</span>
+    </button>
+  </nav>
+
+  <script type="module" src="data.js"></script>
+  <script type="module" src="api.js"></script>
+  <script type="module" src="intelligence.js"></script>
+  <script type="module" src="training.js"></script>
+  <script type="module" src="movement.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
