@@ -4,6 +4,7 @@
  * Works offline; Oracle enhances when available.
  */
 // intelligence.js
+// intelligence.js
 import { callOracle } from './api.js';
 import { store } from './data.js';
 
