@@ -1,30 +1,52 @@
 /**
  * AXIS API helpers
  */
+// api.js
 
-export async function askOracle({ messages, userState, max_tokens = 500 } = {}) {
+export async function callOracle(userState) {
   try {
-    const res = await fetch("/api/oracle", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages, userState, max_tokens })
+    const res = await fetch('/api/oracle', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userState })
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error || "Oracle unavailable");
-    }
-    return await res.json();
-  } catch (err) {
-    console.error("Oracle error:", err);
-    return {
-      content: null,
-      error: "AXIS Oracle is offline. Using local decision logic.",
-      offline: true
-    };
+    if (!res.ok) throw new Error('Oracle error ' + res.status);
+    const data = await res.json();
+    return data.analysis || 'No recommendation.';
+  } catch {
+    return null;
   }
 }
 
-export function buildUserStateForOracle() {
-  // Lazy import avoidance — caller should pass rich state
-  return null;
+export async function searchFoods(query) {
+  try {
+    const res = await fetch(`/api/food?mode=search&query=${encodeURIComponent(query)}`);
+    if (!res.ok) throw new Error('Food search error ' + res.status);
+    const data = await res.json();
+    return data.foods?.food || [];
+  } catch {
+    return [];
+  }
+}
+
+export async function getFoodDetail(foodId) {
+  try {
+    const res = await fetch(`/api/food?mode=detail&food_id=${encodeURIComponent(foodId)}`);
+    if (!res.ok) throw new Error('Food detail error ' + res.status);
+    const data = await res.json();
+    return data.food || null;
+  } catch {
+    return null;
+  }
+}
+
+export async function lookupBarcode(barcode) {
+  try {
+    const res = await fetch(`/api/food?mode=barcode&barcode=${encodeURIComponent(barcode)}`);
+    if (!res.ok) throw new Error('Barcode error ' + res.status);
+    const data = await res.json();
+    return data.foods?.food?.[0] || null;
+  } catch {
+    return null;
+  }
 }
