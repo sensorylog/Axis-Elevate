@@ -2,143 +2,116 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#07080c" />
   <title>AXIS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="app">
-    <!-- Onboarding -->
-    <div id="screen-onboard" class="screen hidden">
-      <div id="onboard-container"></div>
-    </div>
-
-    <!-- Today -->
-    <div id="screen-today" class="screen">
-      <div class="flex-between mb-16">
-        <div>
-          <div class="label">Today</div>
-          <div class="display" id="greeting">AXIS</div>
-        </div>
-        <div id="readiness-pill" class="pill ok">—</div>
-      </div>
-
-      <div id="next-move-card" class="glass-strong next-move">
-        <div class="type-badge" id="nm-type">DECIDING</div>
-        <h2 id="nm-title">Calculating…</h2>
-        <p class="subtitle" id="nm-subtitle"></p>
-        <button class="btn btn-primary btn-block" id="nm-action">Start</button>
-        <p class="reason" id="nm-reason"></p>
-      </div>
-
-      <div class="glass card">
-        <div class="flex-between">
-          <div class="card-title">Nutrition today</div>
-          <span class="tiny" id="nut-summary">—</span>
-        </div>
-        <div class="stat-row">
-          <div>
-            <div class="stat-value" id="nut-protein">0g</div>
-            <div class="stat-label">Protein</div>
-          </div>
-          <div style="text-align:right">
-            <div class="stat-value" id="nut-cal">0</div>
-            <div class="stat-label">kcal</div>
-          </div>
-        </div>
-        <div class="bar-track"><div class="bar-fill" id="nut-bar" style="width:0%"></div></div>
-      </div>
-
-      <div class="glass card">
-        <div class="flex-between">
-          <div class="card-title">Movement</div>
-          <span class="tiny" id="move-source">—</span>
-        </div>
-        <div class="stat-row">
-          <div>
-            <div class="stat-value" id="move-steps">0</div>
-            <div class="stat-label">Steps</div>
-          </div>
-          <div style="text-align:right">
-            <div class="stat-value" id="move-target">8,000</div>
-            <div class="stat-label">Target</div>
-          </div>
-        </div>
-        <div class="bar-track"><div class="bar-fill" id="move-bar" style="width:0%"></div></div>
-      </div>
-    </div>
-
-    <!-- Train -->
-    <div id="screen-train" class="screen hidden">
-      <div class="label mb-8">Train</div>
-      <h1 class="display mb-16">Adaptive Training</h1>
-      <div id="train-content"></div>
-    </div>
-
-    <!-- Food -->
-    <div id="screen-food" class="screen hidden">
-      <div class="label mb-8">Food</div>
-      <h1 class="display mb-16">Nutrition</h1>
-      <div id="food-content"></div>
-    </div>
-
-    <!-- Move -->
-    <div id="screen-move" class="screen hidden">
-      <div class="label mb-8">Move</div>
-      <h1 class="display mb-16">Movement</h1>
-      <div id="move-content"></div>
-    </div>
-
-    <!-- Progress -->
-    <div id="screen-progress" class="screen hidden">
-      <div class="label mb-8">Progress</div>
-      <h1 class="display mb-16">Intelligence</h1>
-      <div id="progress-content"></div>
-    </div>
-
-    <!-- Bottom Nav -->
-    <nav class="bottom-nav" id="bottom-nav">
-      <button class="nav-item active" data-screen="today">
-        <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
-        Today
-      </button>
-      <button class="nav-item" data-screen="train">
-        <svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M6.5 17.5l11-11M4 12h16"/></svg>
-        Train
-      </button>
-      <button class="nav-item" data-screen="food">
-        <svg viewBox="0 0 24 24"><path d="M12 3v18M5 8h14M7 12h10M9 16h6"/></svg>
-        Food
-      </button>
-      <button class="nav-item" data-screen="move">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        Move
-      </button>
-      <button class="nav-item" data-screen="progress">
-        <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg>
-        Progress
-      </button>
+  <header class="app-header">
+    <div class="brand">AXIS</div>
+    <nav class="top-nav">
+      <button data-tab="today" class="active">Today</button>
+      <button data-tab="train">Train</button>
+      <button data-tab="food">Food</button>
+      <button data-tab="move">Move</button>
+      <button data-tab="progress">Progress</button>
     </nav>
+    <button id="oracleToggle" class="icon-btn">Oracle</button>
+  </header>
 
-    <!-- Oracle FAB -->
-    <button class="oracle-fab" id="oracle-fab" title="Oracle" aria-label="Open Oracle">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
-    </button>
-
-    <!-- Sheets -->
-    <div class="sheet-overlay" id="sheet-overlay">
-      <div class="sheet" id="sheet-body">
-        <div class="sheet-handle"></div>
-        <div id="sheet-content"></div>
+  <main class="app-main">
+    <!-- TODAY -->
+    <section id="today" class="tab active">
+      <h1>Your Next Move</h1>
+      <div id="nextMoveCard" class="card next-move">
+        <div class="nm-type" id="nmType">—</div>
+        <div class="nm-title" id="nmTitle">Loading…</div>
+        <div class="nm-meta" id="nmMeta"></div>
+        <button id="nmAction" class="primary-btn">Start</button>
       </div>
-    </div>
-  </div>
 
-  <script type="module" src="js/app.js"></script>
+      <div class="grid">
+        <div class="card">
+          <h3>Readiness</h3>
+          <div id="readinessValue">—</div>
+        </div>
+        <div class="card">
+          <h3>Protein</h3>
+          <div id="proteinValue">—</div>
+        </div>
+        <div class="card">
+          <h3>Sleep</h3>
+          <div id="sleepValue">—</div>
+        </div>
+        <div class="card">
+          <h3>Steps</h3>
+          <div id="stepsValue">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAIN -->
+    <section id="train" class="tab">
+      <h1>Train</h1>
+      <div class="card">
+        <h3>Today’s Session</h3>
+        <div id="sessionInfo">No session generated yet.</div>
+        <button id="generateSessionBtn" class="primary-btn">Generate Session</button>
+      </div>
+    </section>
+
+    <!-- FOOD -->
+    <section id="food" class="tab">
+      <h1>Food</h1>
+      <div class="card">
+        <h3>Search</h3>
+        <input id="foodQuery" type="text" placeholder="e.g. jollof rice, chicken, sushi" />
+        <button id="foodSearchBtn" class="primary-btn">Search</button>
+        <div id="foodResults" class="list"></div>
+      </div>
+      <div class="card">
+        <h3>Barcode</h3>
+        <input id="barcodeInput" type="text" placeholder="Enter barcode" />
+        <button id="barcodeBtn" class="primary-btn">Lookup</button>
+        <div id="barcodeResult" class="list"></div>
+      </div>
+    </section>
+
+    <!-- MOVE -->
+    <section id="move" class="tab">
+      <h1>Move</h1>
+      <div class="card">
+        <h3>Walk</h3>
+        <button id="startWalkBtn" class="primary-btn">Start Walk</button>
+        <div id="walkStatus">Not started</div>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="progress" class="tab">
+      <h1>Progress</h1>
+      <div class="card">
+        <h3>Summary</h3>
+        <div id="progressSummary">No data yet.</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Oracle Panel -->
+  <aside id="oraclePanel" class="oracle-panel hidden">
+    <div class="oracle-header">
+      <h2>Oracle</h2>
+      <button id="closeOracle" class="icon-btn">✕</button>
+    </div>
+    <div id="oracleContent" class="oracle-content">
+      Ask AXIS anything about your training, food, or progress.
+    </div>
+    <div class="oracle-input-row">
+      <input id="oracleInput" type="text" placeholder="I’m exhausted today…" />
+      <button id="oracleSend" class="primary-btn">Send</button>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
 </body>
 </html>
